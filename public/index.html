@@ -570,7 +570,7 @@
       </div>
     </div>
 
-    <div class="cards-container">
+    <div id="in-plan-cards" class="cards-container">
       <div class="task-card">
         <div class="card-top">
           <div class="tags-group">
@@ -633,12 +633,11 @@
           </div>
         </div>
       </div>
-
-      <!-- Кнопка додавання задачі знизу колонки -->
-      <button class="add-task-btn">
+  
+    </div>
+     <button class="add-task-btn">
   <i class="material-symbols-outlined">add</i> Add task
 </button>
-    </div>
   </div>
 
   <!-- КОЛОНКА 2: In Progress -->
@@ -656,7 +655,7 @@
       </div>
     </div>
 
-    <div class="cards-container">
+    <div id="in-progress-cards" class="cards-container">
       <div class="task-card active-border">
         <div class="card-top">
           <div class="tags-group">
@@ -696,10 +695,10 @@
         </div>
       </div>
 
-      <button class="add-task-btn">
+    </div>
+    <button class="add-task-btn">
   <i class="material-symbols-outlined">add</i> Add task
 </button>
-    </div>
   </div>
 
   <!-- КОЛОНКА 3: Done -->
@@ -717,7 +716,7 @@
       </div>
     </div>
 
-    <div class="cards-container">
+    <div id="done-cards" class="cards-container">
       <div class="task-card card-done">
         <div class="card-top">
           <div class="tags-group">
@@ -741,11 +740,10 @@
           </span>
         </div>
       </div>
-
-     <button class="add-task-btn">
+    </div>
+    <button class="add-task-btn">
   <i class="material-symbols-outlined">add</i> Add task
 </button>
-    </div>
   </div>
 
 </div>
@@ -845,6 +843,6 @@
     </button>
   </div>
 </div>
-  <script src="/src/script.js""></script>
+  <script src="/src/script.js" defer></script>
 </body>
 </html>

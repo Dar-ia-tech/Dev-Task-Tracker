@@ -3,7 +3,11 @@ const modal = document.getElementById('addTaskModal');
 const closeBtn = document.getElementById('closeModalBtn');
 const cancelBtn = document.getElementById('cancelModalBtn');
 const addTaskForm = document.querySelector('.modal-form');
+const todoColumn = document.getElementById('in-plan-cards');
+const inProgressColumn = document.getElementById('in-progress-cards');
+const doneColumn = document.getElementById('done-cards');
 let currentEditingCard = null;
+let tasks = [];
 
 // --- Відкриття / Закриття модального вікна ---
 function openModal() {
@@ -38,6 +42,21 @@ addTaskForm.addEventListener('submit', function (e) {
   const priority = document.getElementById('taskPriority').value;
   const tag = document.getElementById('taskTag').value;
   const dueDate = document.getElementById('taskDueDate').value;
+
+  const newTask = {
+    id: 'BL-' + Math.floor(Math.random() * 1000),
+    title: title,
+    desc: desc,
+    tag: tag,
+    priority: priority,
+    dueDate: dueDate, // або з поля дати
+    status: status
+  }
+
+  tasks.push(newTask);
+
+saveTask();
+loadTasks();
 
   // Валідація заголовка
   if (title.trim() === '') {
@@ -214,3 +233,83 @@ document.addEventListener('click', function (e) {
     menu.classList.remove('show');
   });
 });
+
+function saveTask(){
+  const taskData = JSON.stringify(tasks);
+  localStorage.setItem(tasks, taskData);
+}
+
+function createTaskCard(task) {
+  return `
+    <div class="task-card" data-id="${task.id}">
+      <div class="card-top">
+        <div class="tags-group">
+          <span class="tag tag-${task.tag ? task.tag.toLowerCase() : ''}">${task.tag}</span>
+          <span class="task-id">${task.id}</span>
+        </div>
+        <div class="dropdown">
+          <button class="card-more" type="button">
+            <i class="material-symbols-outlined">more_horiz</i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item edit-task-btn" type="button">
+              <i class="material-symbols-outlined">edit</i> Edit task
+            </button>
+            <button class="dropdown-item duplicate-task-btn" type="button">
+              <i class="material-symbols-outlined">content_copy</i> Duplicate
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item delete-task-btn" type="button">
+              <i class="material-symbols-outlined">delete</i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <h4 class="task-title">${task.title}</h4>
+      <p class="task-desc">${task.desc}</p>
+      <div class="attachment-chip">
+        <i class="material-symbols-outlined">attach_file</i>
+        <span>auth-flow.fig</span>
+      </div>
+      <div class="card-footer">
+        <span class="priority priority-${task.priority ? task.priority.toLowerCase() : ''}">${task.priority} priority</span>
+        <span class="due-date">
+          <i class="material-symbols-outlined">calendar_today</i> ${task.dueDate}
+        </span>
+      </div>
+      <div class="card-subfooter">
+        <span class="project-tag">
+          <span class="dot purple"></span> Website launch
+        </span>
+        <div class="comments-count">
+          <i class="material-symbols-outlined">chat_bubble</i> 3
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function loadTasks(){
+  const savedTasks = localStorage.getItem('tasks');
+
+  if(savedTasks !== null){
+    tasks = JSON.parse(savedTasks);
+  }
+
+  todoColumn.innerHTML = '';
+  inProgressColumn.innerHTML = '';
+  doneColumn.innerHTML = '';
+
+  tasks.forEach(task => {
+    const cardHTML = createTaskCard(task);
+    if(task.status === 'in-plan'){
+      todoColumn.insertAdjacentHTML('beforeend', cardHTML);
+    }else if(task.status === 'in-progress'){
+      inProgressColumn.insertAdjacentHTML('beforeend', cardHTML);
+    }else{
+      doneColumn.insertAdjacentHTML('beforeend', cardHTML);
+    }
+  });
+}
+
+loadTasks();
