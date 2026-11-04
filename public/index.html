@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev-Task Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Material Symbols (Icons) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+ <sidebar class="sidebar">
+<aside class="sidebar">
+  <!-- 1. Шапка сайдбару (Логотип + Профіль) -->
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">🌸</span>
+      <span class="logo-text">flora</span>
+    </div>
+    
+    <div class="user-profile">
+      <div class="avatar">MD</div>
+      <div class="user-info">
+        <span class="user-name">Alex Kovalenko</span>
+        <span class="workspace-name">Personal workspace</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Навігаційне меню -->
+<nav class="sidebar-nav">
+  <span class="nav-section-title">WORKSPACE</span>
+  <ul>
+    <li class="active">
+      <a href="#">
+        <i class="material-symbols-outlined">grid_view</i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="material-symbols-outlined">select_check_box</i>
+        <span>My tasks</span>
+        <span class="badge">9</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="material-symbols-outlined">calendar_today</i>
+        <span>Calendar</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="material-symbols-outlined">show_chart</i>
+        <span>Analytics</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+  <!-- 3. Блок проєктів -->
+  <div class="projects-section">
+    <div class="section-header">
+      <span class="nav-section-title">MY PROJECTS</span>
+      <button class="add-project-btn">+</button>
+    </div>
+    <ul class="projects-nav-column">
+      <li class="project-nav"><span class="dot purple"></span><a>Website launch</a></li>
+      <li class="project-nav"><span class="dot pink"></span> Learning journey</li>
+      <li class="project-nav"><span class="dot green"></span> Personal growth</li>
+    </ul>
+  </div>
+
+  <!-- 4. Віджет фішки: Plant Companion + Streak -->
+  <div class="plant-widget">
+    <div class="plant-widget-container">
+    <div class="plant-header">
+      <p class="plant-title">Plant Companion</p>
+      <span class="material-symbols-outlined">more_horiz</span>
+    </div>
+    
+    <div class="plant-content">
+      <div class="plant-avatar">🌸</div>
+      <h3>Meet Rosie</h3>
+      <p class="plant-desc">Every task helps her grow. Keep your momentum blooming!</p>
+      
+      <div class="plant-progress-info">
+        <span>Level 3 - Flourishing</span>
+        <span>72%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 72%;"></div>
+      </div>
+    </div>
+    </div>
+  </div>
+   <!-- Блок Streak -->
+    <div class="streak-badge">
+      <p class="streak-badge-text">🔥 Streak: 7 Days</p>
+    </div>
+  </div>
+
+  <!-- 5. Нижня частина (Footer) -->
+  <div class="sidebar-footer">
+    <a href="#" class="footer-link">⚙️ Settings</a>
+    <a href="#" class="footer-link">❓ Help & shortcuts</a>
+    <div class="save-status">
+      <span class="status-dot"></span> All changes saved
+    </div>
+  </div>
+</aside>
+ </sidebar>
+
+    <!-- ОСНОВНА ЧАСТИНА (MAIN CONTENT) -->
+<main class="main-content">
+
+  <!-- 1. Верхня панель (Header): Пошук, дата, кнопка Нова задача -->
+  <header class="top-header">
+    <!-- Пошук 
+    <div class="search-bar">
+      <i class="material-symbols-outlined search-icon">search</i>
+      <input type="text" placeholder="Search anything..." />
+      <span class="search-shortcut">⌘K</span>
+    </div>-->
+
+    <!-- Дії справа (Сповіщення + Профіль + Кнопка)
+    <div class="header-actions">
+      <button class="icon-btn">
+        <i class="material-symbols-outlined">notifications</i>
+      </button>
+
+      <div class="user-avatar-mini">AK</div> -->
+    </div>
+  </header>
+
+  <!-- 2. Вітальний заголовок -->
+  <section class="welcom-section">
+  <div class="welcome-text">
+    <h1>A little progress, every day</h1>
+    <p>Welcome back, Alex. Let's make room for your next big idea.</p>
+  </div>
+
+  <div class="add-task">
+    <span class="current-date">Wed, Oct 14, 2026</span>
+      <button class="btn-primary">
+        <i class="material-symbols-outlined">add</i>
+        <span>New task</span>
+      </button>
+    </div>
+    </section>   
+<section class="dashboard-analytics">
+
+  <div class="analytics-card grid-card">
+    
+    <div class="card-header">
+      <div class="card-title-group">
+        <h2>Your consistency, in color</h2>
+        <span class="status-pill green">• ON TRACK</span>
+      </div>
+      
+      <div class="year-select">
+        <span>2026</span>
+        <i class="material-symbols-outlined">expand_more</i>
+      </div>
+    </div>
+
+    <!-- Обгортка сітки -->
+    <div class="grid-wrapper">
+      <!-- Дні тижня зліва -->
+      <div class="grid-days">
+        <span>Mon</span>
+        <span>Wed</span>
+        <span>Fri</span>
+        <span>Sun</span>
+      </div>
+
+      <!-- Месяці + Сама сітка -->
+      <div class="grid-body">
+        <div class="grid-months">
+          <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span>
+          <span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+          <span>Sep</span><span>Oct</span>
+        </div>
+
+       <div class="activity-grid">
+            <!-- Приклади зафарбованих квадратиків за допомогою класів level-1, level-2, level-3, pink -->
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
+            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
+            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
+            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
+            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
+            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+           </div>
+      </div>
+    </div>
+
+    <!-- Подвал лівої картки -->
+    <div class="card-footer">
+      <span class="total-count">238 tasks completed this year</span>
+      <div class="legend">
+        <span>Less</span>
+        <div class="square"></div>
+        <div class="square level-1"></div>
+        <div class="square level-2"></div>
+        <div class="square level-3"></div>
+        <div class="square pink"></div>
+        <span>More</span>
+        <span class="streak-label">Streak day</span>
+      </div>
+    </div>
+
+  </div> 
+  <div class="analytics-card momentum-card">
+    <div class="card-header">
+      <span class="card-subtitle">This week's momentum</span>
+      <i class="material-symbols-outlined icon-pink">auto_awesome</i>
+    </div>
+
+    <div class="momentum-body">
+      <div class="big-stat">
+        <span class="stat-number">3</span>
+        <span class="stat-total">/ 5 tasks</span>
+      </div>
+
+      <div class="momentum-badge">
+        <i class="material-symbols-outlined">trending_up</i>
+        <span>+1 task vs. last week</span>
+      </div>
+
+      <p class="momentum-desc">
+        Small steps. Strong roots. You're 2 tasks away from your goal.
+      </p>
+    </div>
+  </div> 
+
+</section>
+
+<!--<section class="task-board">
+  
+  <div class="board-header">
+    <div class="board-title-group">
+      <h2>My task board</h2>
+      <span class="tasks-count">9 tasks - 3 completed</span>
+    </div>
+
+    <div class="board-controls">
+      <div class="filter-group">
+        <button class="filter-chip active">All tasks</button>
+        <button class="filter-chip">Dev</button>
+        <button class="filter-chip">Study</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="control-btn">
+          <i class="material-symbols-outlined">filter_list</i>
+          <span>Filter</span>
+        </button>
+        <button class="control-btn">
+          <i class="material-symbols-outlined">swap_vert</i>
+          <span>Priority</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="kanban-columns">
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <div class="column-title">
+          <span class="status-dot purple"></span>
+          <h3>In Plan / To Do</h3>
+          <span class="column-count">3</span>
+        </div>
+        <div class="column-actions">
+          <a href="#addTaskModal" class="icon-btn-small">
+  <i class="material-symbols-outlined">add</i>
+</a>
+
+        </div>
+      </div>
+
+      <div class="cards-container">
+        <div class="task-card">
+          <div class="card-top">
+            <div class="tags-group">
+              <span class="tag tag-dev">Dev</span>
+              <span class="task-id">BL-024</span>
+            </div>
+            <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+          </div>
+          <h4 class="task-title">Build the authentication flow</h4>
+          <p class="task-desc">Sign in, sign up, and a little less friction.</p>
+          <div class="attachment-chip">
+            <i class="material-symbols-outlined">attach_file</i>
+            <span>auth-flow.fig</span>
+          </div>
+          <div class="card-footer">
+            <span class="priority priority-high">
+              <i class="material-symbols-outlined">flag</i> High priority
+            </span>
+            <span class="due-date">
+              <i class="material-symbols-outlined">calendar_today</i> Oct 18
+            </span>
+          </div>
+          <div class="card-subfooter">
+            <span class="project-tag">
+              <span class="dot purple"></span> Website launch
+            </span>
+            <div class="comments-count">
+              <i class="material-symbols-outlined">chat_bubble</i> 3
+            </div>
+          </div>
+        </div>
+
+        <div class="task-card">
+          <div class="card-top">
+            <div class="tags-group">
+              <span class="tag tag-study">Study</span>
+              <span class="task-id">BL-025</span>
+            </div>
+            <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+          </div>
+          <h4 class="task-title">Explore React Server Components</h4>
+          <p class="task-desc">Read the docs. Turn the "why" into a demo.</p>
+          <div class="checklist-info">
+            <i class="material-symbols-outlined">check_box</i> 0 / 4 subtasks completed
+          </div>
+          <div class="card-footer">
+            <span class="priority priority-medium">
+              <i class="material-symbols-outlined">flag</i> Medium priority
+            </span>
+            <span class="due-date">
+              <i class="material-symbols-outlined">calendar_today</i> Oct 18
+            </span>
+          </div>
+          <div class="card-subfooter">
+            <span class="project-tag">
+              <span class="dot pink"></span> Learning journey
+            </span>
+            <div class="comments-count">
+              <i class="material-symbols-outlined">chat_bubble</i> 1
+            </div>
+          </div>
+        </div>
+
+        <a href="#addTaskModal" class="icon-btn-small">
+  <i class="material-symbols-outlined">add</i>
+</a>
+      </div>
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <div class="column-title">
+          <span class="status-dot pink"></span>
+          <h3>In Progress</h3>
+          <span class="column-count">3</span>
+        </div>
+        <div class="column-actions">
+          <a href="#addTaskModal" class="icon-btn-small">
+  <i class="material-symbols-outlined">add</i>
+</a>
+        </div>
+      </div>
+
+      <div class="cards-container">
+        <div class="task-card active-border">
+          <div class="card-top">
+            <div class="tags-group">
+              <span class="tag tag-dev">Dev</span>
+              <span class="task-id">BL-021</span>
+            </div>
+            <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+          </div>
+          <h4 class="task-title">Develop the dashboard UI</h4>
+          <p class="task-desc">Bring the new workspace to life, one component at a time.</p>
+          
+          <div class="subtask-progress">
+            <div class="progress-labels">
+              <span>Checklist - 4 / 5</span>
+              <span>67%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill-bar" style="width: 67%;"></div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <span class="priority priority-high">
+              <i class="material-symbols-outlined">flag</i> High priority
+            </span>
+            <span class="due-date text-pink">
+              <i class="material-symbols-outlined">schedule</i> Today
+            </span>
+          </div>
+          <div class="card-subfooter">
+            <span class="project-tag">
+              <span class="dot purple"></span> Website launch
+            </span>
+            <div class="comments-count">
+              <i class="material-symbols-outlined">chat_bubble</i> 5
+            </div>
+          </div>
+        </div>
+
+       <a href="#addTaskModal" class="icon-btn-small">
+  <i class="material-symbols-outlined">add</i>
+</a>
+      </div>
+    </div>
+
+    <div class="kanban-column">
+      <div class="column-header">
+        <div class="column-title">
+          <span class="status-dot green"></span>
+          <h3>Done</h3>
+          <span class="column-count">3</span>
+        </div>
+        <div class="column-actions">
+          <button class="icon-btn-small"><a href="#addTaskModal" class="add-task-btn"><i class="material-symbols-outlined">add</i></a></button>
+          <button class="icon-btn-small"><i class="material-symbols-outlined">more_horiz</i></button>
+        </div>
+      </div>
+
+      <div class="cards-container">
+        <div class="task-card card-done">
+          <div class="card-top">
+            <div class="tags-group">
+              <span class="tag tag-dev">Dev</span>
+              <span class="task-id">BL-018</span>
+            </div>
+          <button class="add-task-btn">
+  <i class="material-symbols-outlined">add</i> Add task
+</button>
+          </div>
+          <h4 class="task-title completed">
+            <i class="material-symbols-outlined check-icon">check_circle</i>
+            Create the design system
+          </h4>
+          <p class="task-desc">Tokens, components, and a consistent foundation.</p>
+          <div class="attachment-chip">
+            <i class="material-symbols-outlined">attach_file</i>
+            <span>design-system.fig</span>
+          </div>
+          <div class="card-footer">
+            <span class="priority priority-high">
+              <i class="material-symbols-outlined">flag</i> High priority
+            </section>-->
+
+            <section class="task-board">
+  
+  <div class="board-header">
+    <div class="board-title-group">
+      <h2>My task board</h2>
+      <span class="tasks-count">9 tasks - 3 completed</span>
+    </div>
+
+    <div class="board-controls">
+      <div class="filter-group">
+        <button class="filter-chip active">All tasks</button>
+        <button class="filter-chip">Dev</button>
+        <button class="filter-chip">Study</button>
+      </div>
+
+      <div class="action-buttons">
+        <button class="control-btn">
+          <i class="material-symbols-outlined">filter_list</i>
+          <span>Filter</span>
+        </button>
+        <button class="control-btn">
+          <i class="material-symbols-outlined">swap_vert</i>
+          <span>Priority</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+<div class="kanban-columns">
+
+  <!-- КОЛОНКА 1: In Plan / To Do -->
+  <div class="kanban-column">
+    <div class="column-header">
+      <div class="column-title">
+        <span class="status-dot purple"></span>
+        <h3>In Plan / To Do</h3>
+        <span class="column-count">3</span>
+      </div>
+      <div class="column-actions">
+        <!-- Залишаємо тільки три крапки (плюсик зверху прибрано) -->
+        <button class="icon-btn-small">
+          <i class="material-symbols-outlined">more_horiz</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="cards-container">
+      <div class="task-card">
+        <div class="card-top">
+          <div class="tags-group">
+            <span class="tag tag-dev">Dev</span>
+            <span class="task-id">BL-024</span>
+          </div>
+          <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+        </div>
+        <h4 class="task-title">Build the authentication flow</h4>
+        <p class="task-desc">Sign in, sign up, and a little less friction.</p>
+        <div class="attachment-chip">
+          <i class="material-symbols-outlined">attach_file</i>
+          <span>auth-flow.fig</span>
+        </div>
+        <div class="card-footer">
+          <span class="priority priority-high">
+            <i class="material-symbols-outlined">flag</i> High priority
+          </span>
+          <span class="due-date">
+            <i class="material-symbols-outlined">calendar_today</i> Oct 18
+          </span>
+        </div>
+        <div class="card-subfooter">
+          <span class="project-tag">
+            <span class="dot purple"></span> Website launch
+          </span>
+          <div class="comments-count">
+            <i class="material-symbols-outlined">chat_bubble</i> 3
+          </div>
+        </div>
+      </div>
+
+      <div class="task-card">
+        <div class="card-top">
+          <div class="tags-group">
+            <span class="tag tag-study">Study</span>
+            <span class="task-id">BL-025</span>
+          </div>
+          <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+        </div>
+        <h4 class="task-title">Explore React Server Components</h4>
+        <p class="task-desc">Read the docs. Turn the "why" into a demo.</p>
+        <div class="checklist-info">
+          <i class="material-symbols-outlined">check_box</i> 0 / 4 subtasks completed
+        </div>
+        <div class="card-footer">
+          <span class="priority priority-medium">
+            <i class="material-symbols-outlined">flag</i> Medium priority
+          </span>
+          <span class="due-date">
+            <i class="material-symbols-outlined">calendar_today</i> Oct 18
+          </span>
+        </div>
+        <div class="card-subfooter">
+          <span class="project-tag">
+            <span class="dot pink"></span> Learning journey
+          </span>
+          <div class="comments-count">
+            <i class="material-symbols-outlined">chat_bubble</i> 1
+          </div>
+        </div>
+      </div>
+
+      <!-- Кнопка додавання задачі знизу колонки -->
+      <button class="add-task-btn">
+  <i class="material-symbols-outlined">add</i> Add task
+</button>
+    </div>
+  </div>
+
+  <!-- КОЛОНКА 2: In Progress -->
+  <div class="kanban-column">
+    <div class="column-header">
+      <div class="column-title">
+        <span class="status-dot pink"></span>
+        <h3>In Progress</h3>
+        <span class="column-count">3</span>
+      </div>
+      <div class="column-actions">
+        <button class="icon-btn-small">
+          <i class="material-symbols-outlined">more_horiz</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="cards-container">
+      <div class="task-card active-border">
+        <div class="card-top">
+          <div class="tags-group">
+            <span class="tag tag-dev">Dev</span>
+            <span class="task-id">BL-021</span>
+          </div>
+          <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+        </div>
+        <h4 class="task-title">Develop the dashboard UI</h4>
+        <p class="task-desc">Bring the new workspace to life, one component at a time.</p>
+        
+        <div class="subtask-progress">
+          <div class="progress-labels">
+            <span>Checklist - 4 / 5</span>
+            <span>67%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill-bar" style="width: 67%;"></div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <span class="priority priority-high">
+            <i class="material-symbols-outlined">flag</i> High priority
+          </span>
+          <span class="due-date text-pink">
+            <i class="material-symbols-outlined">schedule</i> Today
+          </span>
+        </div>
+        <div class="card-subfooter">
+          <span class="project-tag">
+            <span class="dot purple"></span> Website launch
+          </span>
+          <div class="comments-count">
+            <i class="material-symbols-outlined">chat_bubble</i> 5
+          </div>
+        </div>
+      </div>
+
+      <button class="add-task-btn">
+  <i class="material-symbols-outlined">add</i> Add task
+</button>
+    </div>
+  </div>
+
+  <!-- КОЛОНКА 3: Done -->
+  <div class="kanban-column">
+    <div class="column-header">
+      <div class="column-title">
+        <span class="status-dot green"></span>
+        <h3>Done</h3>
+        <span class="column-count">3</span>
+      </div>
+      <div class="column-actions">
+        <button class="icon-btn-small">
+          <i class="material-symbols-outlined">more_horiz</i>
+        </button>
+      </div>
+    </div>
+
+    <div class="cards-container">
+      <div class="task-card card-done">
+        <div class="card-top">
+          <div class="tags-group">
+            <span class="tag tag-dev">Dev</span>
+            <span class="task-id">BL-018</span>
+          </div>
+          <button class="card-more"><i class="material-symbols-outlined">more_horiz</i></button>
+        </div>
+        <h4 class="task-title completed">
+          <i class="material-symbols-outlined check-icon">check_circle</i>
+          Create the design system
+        </h4>
+        <p class="task-desc">Tokens, components, and a consistent foundation.</p>
+        <div class="attachment-chip">
+          <i class="material-symbols-outlined">attach_file</i>
+          <span>design-system.fig</span>
+        </div>
+        <div class="card-footer">
+          <span class="priority priority-high">
+            <i class="material-symbols-outlined">flag</i> High priority
+          </span>
+        </div>
+      </div>
+
+     <button class="add-task-btn">
+  <i class="material-symbols-outlined">add</i> Add task
+</button>
+    </div>
+  </div>
+
+</div>
+</section>
+</main>
+
+<!-- МОДАЛЬНЕ ВІКНО СТВОРЕННЯ ЗАДАЧІ -->
+<div class="modal-overlay" id="addTaskModal">
+  <div class="modal-card">
+    
+    <div class="modal-header">
+      <h3>Add New Task</h3>
+     <button type="button" class="modal-close-btn" id="closeModalBtn">
+  <i class="material-symbols-outlined">close</i>
+</button>
+    </div>
+
+    <form class="modal-form">
+      
+      <div class="form-group">
+        <label for="taskTitle">Task Title</label>
+        <input type="text" id="taskTitle" placeholder="e.g. Build authentication flow" required />
+      </div>
+
+      <div class="form-group">
+        <label for="taskDesc">Description / Plans</label>
+        <textarea id="taskDesc" rows="3" placeholder="Write your plans and task details here..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskStatus">Status</label>
+          <select id="taskStatus">
+            <option value="todo">In Plan / To Do</option>
+            <option value="in_progress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="taskPriority">Priority</label>
+          <select id="taskPriority">
+            <option value="low">Low priority</option>
+            <option value="medium" selected>Medium priority</option>
+            <option value="high">High priority</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="taskTag">Category</label>
+          <select id="taskTag">
+            <option value="Dev">Dev</option>
+            <option value="Study">Study</option>
+            <option value="Personal">Personal</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="taskDueDate">Due Date</label>
+          <input type="date" id="taskDueDate" />
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" id="cancelModalBtn">Cancel</button>
+        <button type="submit" class="btn-primary">
+          <i class="material-symbols-outlined">add</i>
+          <span>Create Task</span>
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="card-more" type="button">
+    <i class="material-symbols-outlined">more_horiz</i>
+  </button>
+  
+  <div class="dropdown-menu">
+    <button class="dropdown-item edit-task-btn" type="button">
+      <i class="material-symbols-outlined">edit</i> Edit task
+    </button>
+
+    <button class="dropdown-item duplicate-task-btn" type="button">
+      <i class="material-symbols-outlined">content_copy</i> Duplicate
+    </button>
+    
+    <div class="dropdown-divider"></div>
+
+    <button class="dropdown-item delete-task-btn" type="button">
+      <i class="material-symbols-outlined">delete</i> Delete
+    </button>
+  </div>
+</div>
+  <script src="/src/script.js""></script>
+</body>
+</html>
