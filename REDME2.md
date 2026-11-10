@@ -72,3 +72,63 @@
 ## 🗓️ ЕТАП 4: Документація та Фіналізація
 - [ ] **Тестування:** Перевірка всіх сценаріїв використання на чистому середовищі[cite: 3].
 - [ ] **Документація (`README.md`):** Опис архітектури, інструкція із запуску Node.js сервера та скріншоти[cite: 3].
+
+
+const taskId = 'BL-' + Math.floor(100 + Math.random() * 900);
+
+    const card = document.createElement('div');
+    card.className = 'task-card';
+    card.innerHTML = `
+        <div class="card-top">
+          <div class="tags-group">
+            <span class="tag tag-${tag.toLowerCase()}">${tag}</span>
+            <span class="task-id">${taskId}</span>
+          </div>
+          <div class="dropdown">
+            <button class="card-more" type="button">
+              <i class="material-symbols-outlined">more_horiz</i>
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item edit-task-btn" type="button">
+                <i class="material-symbols-outlined">edit</i> Edit task
+              </button>
+              <button class="dropdown-item duplicate-task-btn" type="button">
+                <i class="material-symbols-outlined">content_copy</i> Duplicate
+              </button>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item delete-task-btn" type="button">
+                <i class="material-symbols-outlined">delete</i> Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <h4 class="task-title">${title}</h4>
+        <p class="task-desc">${desc}</p>
+        <div class="attachment-chip">
+          <i class="material-symbols-outlined">attach_file</i>
+          <span>auth-flow.fig</span>
+        </div>
+        <div class="card-footer">
+          <span class="priority priority-${priority.toLowerCase()}">${priority} priority</span>
+          <span class="due-date">
+            <i class="material-symbols-outlined">calendar_today</i> ${dueDate}
+          </span>
+        </div>
+        <div class="card-subfooter">
+          <span class="project-tag">
+            <span class="dot purple"></span> Website launch
+          </span>
+          <div class="comments-count">
+            <i class="material-symbols-outlined">chat_bubble</i> 3
+          </div>
+        </div>`;
+
+         if (targetContainer) {
+      const addBtnColumn = targetContainer.querySelector('.add-task-btn');
+      if (addBtnColumn) {
+        targetContainer.insertBefore(card, addBtnColumn);
+      } else {
+        targetContainer.appendChild(card);
+      }
+    }
+  
