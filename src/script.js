@@ -4,6 +4,8 @@ const closeBtn = document.getElementById('closeModalBtn');
 const cancelBtn = document.getElementById('cancelModalBtn');
 const addTaskForm = document.querySelector('.modal-form');
 let currentEditingCard = null;
+const searchFilter = document.getElementById('searchInput');
+const priorityFilter = document.getElementById('priorityFilter');
 let tasks = [];
 
 // --- Відкриття / Закриття модального вікна ---
@@ -15,6 +17,13 @@ function closeModal() {
   modal.classList.remove('active');
   currentEditingCard = null;
 }
+
+const currentFilters = {
+ tab: 'all',
+ priority: 'all',
+ search: ''
+}
+
 
 // Слухачі для кнопок додавання нової задачі
 addBtn.forEach(btn => {
@@ -120,6 +129,18 @@ document.addEventListener('click', function (e) {
   const deleteBtn = e.target.closest('.delete-task-btn');
   const duplicateBtn = e.target.closest('.duplicate-task-btn');
   const editBtn = e.target.closest('.edit-task-btn');
+
+     const filterBtn = e.target.closest('.filter-chip');
+ if(filterBtn){
+  document.querySelectorAll('.filter-chip').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  filterBtn.classList.add('active');
+  currentFilters.tab = filterBtn.dataset.filter;
+  console.log('Поточні фільтри:', currentFilters);
+  return;
+ }
 
   // 1. Натискання на Edit Task
   if (editBtn) {
@@ -279,13 +300,31 @@ function saveTask(){
   const taskData = JSON.stringify(tasks);
   localStorage.setItem('tasks', taskData);
 }
-
 function createTaskCard(task) {
+  
+  const priorityVal = (task.priority || 'medium').toLowerCase();
+  
+  let formattedDate = '';
+  let overdueClass = '';
+
+  if (task.dueDate) {
+    formattedDate = new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const due = new Date(task.dueDate);
+
+    if (due < today && task.status !== 'done') {
+      overdueClass = 'overdue';
+    }
+  }
+
   return `
     <div class="task-card" draggable="true" data-id="${task.id}">
       <div class="card-top">
         <div class="tags-group">
-          <span class="tag tag-${task.tag ? task.tag.toLowerCase() : ''}">${task.tag}</span>
+          <span class="tag tag-${task.tag ? task.tag.toLowerCase() : 'dev'}">${task.tag || 'Dev'}</span>
           <span class="task-id">${task.id}</span>
         </div>
         <div class="dropdown">
@@ -306,18 +345,26 @@ function createTaskCard(task) {
           </div>
         </div>
       </div>
+
       <h4 class="task-title">${task.title}</h4>
-      <p class="task-desc">${task.desc}</p>
+
+      ${task.desc ? `<p class="task-desc">${task.desc}</p>` : ''}
+
       <div class="attachment-chip">
         <i class="material-symbols-outlined">attach_file</i>
         <span>auth-flow.fig</span>
       </div>
+
       <div class="card-footer">
-        <span class="priority priority-${task.priority ? task.priority.toLowerCase() : ''}">${task.priority} priority</span>
-        <span class="due-date">
-          <i class="material-symbols-outlined">calendar_today</i> ${task.dueDate}
-        </span>
+        <span class="priority priority-${priorityVal}">${priorityVal} priority</span>
+        
+        ${task.dueDate ? `
+          <span class="due-date ${overdueClass}">
+            <i class="material-symbols-outlined">calendar_today</i> ${formattedDate}
+          </span>
+        ` : ''}
       </div>
+
       <div class="card-subfooter">
         <span class="project-tag">
           <span class="dot purple"></span> Website launch
@@ -363,5 +410,16 @@ if(!todoColumn || !inProgressColumn || !doneColumn) return;
     }
   });
 }
+
+function isOverdue(dueDate, status){
+  if(!dueDate || status === 'done') return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const due = new Date(dueDate);
+  return due < today;
+}
+
 
 loadTasks();

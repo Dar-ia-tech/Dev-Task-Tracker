@@ -725,6 +725,28 @@ Start Task-Board Section
   flex-wrap: wrap;
 }
 
+.search-control input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  font-size: 13px;
+  width: 140px;
+}
+
+.search-control input::placeholder {
+  color: var(--text-muted);
+}
+
+select.control-btn {
+  outline: none;
+}
+
+select.control-btn option {
+  background-color: var(--bg-card);
+  color: var(--text-main);
+}
+
 .view-toggle {
   display: flex;
   background-color: var(--bg-card);
@@ -1238,6 +1260,35 @@ Finish Task-Board Section
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+/* --- ПРІОРИТЕТИ ТА ДЕДЛАЙНИ --- */
+
+/* Кольори для пріоритетів */
+.priority-tag.low {
+  color: #4ade80; /* Зелений */
+}
+
+.priority-tag.medium {
+  color: #facc15; /* Жовтий / Золотистий */
+}
+
+.priority-tag.high {
+  color: #f87171; /* Червоний */
+}
+
+/* Блок дедлайну на картці */
+.task-deadline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+.due-date.overdue {
+  color: #ef4444 !important; /* Яскраво-червоний */
+  font-weight: 600;
 }
 
 .form-group {

@@ -534,20 +534,23 @@
 
     <div class="board-controls">
       <div class="filter-group">
-        <button class="filter-chip active">All tasks</button>
-        <button class="filter-chip">Dev</button>
-        <button class="filter-chip">Study</button>
+        <button class="filter-chip active" data-filter="all">All tasks</button>
+        <button class="filter-chip" data-filter="today">Today</button>
+        <button class="filter-chip" data-filter="dev">Dev</button>
+        <button class="filter-chip" data-filter="study">Study</button>
       </div>
 
       <div class="action-buttons">
-        <button class="control-btn">
-          <i class="material-symbols-outlined">filter_list</i>
-          <span>Filter</span>
-        </button>
-        <button class="control-btn">
-          <i class="material-symbols-outlined">swap_vert</i>
-          <span>Priority</span>
-        </button>
+        <div class="control-btn search-control">
+          <i class="material-symbols-outlined">search</i>
+          <input type="text" id="searchInput" placeholder="Search tasks..." autocomplete="off">
+        </div>
+        <select id="priorityFilter" class="control-btn">
+          <option value="all">All Priorities</option>
+          <option value="high">High Priority</option>
+          <option value="medium">Medium Priority</option>
+          <option value="low">Low Priority</option>
+        </select>
       </div>
     </div>
   </div>
