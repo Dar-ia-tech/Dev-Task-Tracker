@@ -24,6 +24,25 @@ const currentFilters = {
  search: ''
 }
 
+  const searchInput = document.getElementById('searchInput');
+  const priorityBtn = document.getElementById('priorityFilter');
+
+
+  if(searchInput){
+    searchInput.addEventListener('input', function(e){
+     currentFilters.search = e.target.value.trim().toLowerCase();
+       console.log(currentFilters);
+       loadTasks();
+    });
+  }
+
+  if(priorityBtn){
+    priorityBtn.addEventListener('change', function(e){
+     currentFilters.priority = e.target.value
+       console.log(currentFilters);
+       loadTasks();
+    })
+  }
 
 // Слухачі для кнопок додавання нової задачі
 addBtn.forEach(btn => {
@@ -138,6 +157,7 @@ document.addEventListener('click', function (e) {
 
   filterBtn.classList.add('active');
   currentFilters.tab = filterBtn.dataset.filter;
+  loadTasks();
   console.log('Поточні фільтри:', currentFilters);
   return;
  }
@@ -386,9 +406,11 @@ function loadTasks(){
    tasks = [];
   }
 
-  const todoColumn = document.getElementById('in-plan-cards');
+const todoColumn = document.getElementById('in-plan-cards');
 const inProgressColumn = document.getElementById('in-progress-cards');
 const doneColumn = document.getElementById('done-cards');
+
+const filteredTasks = getFilteredTasks();
 
 if(!todoColumn || !inProgressColumn || !doneColumn) return;
 
@@ -396,7 +418,7 @@ if(!todoColumn || !inProgressColumn || !doneColumn) return;
   inProgressColumn.innerHTML = '';
   doneColumn.innerHTML = '';
 
-  tasks.forEach(task => {
+  filteredTasks.forEach(task => {
     const cardHTML = createTaskCard(task);
     const status = (task.status || 'in-plan').toLowerCase();
     if (status === 'in-plan' || status === 'todo' || status === 'in_plan' || status === 'in-plan-cards') {
@@ -419,6 +441,54 @@ function isOverdue(dueDate, status){
 
   const due = new Date(dueDate);
   return due < today;
+}
+
+function getFilteredTasks() {
+  return tasks.filter(task => {
+    // 1. Фільтр за вкладками (Dev, Study, Today)
+    if (currentFilters.tab === 'dev' || currentFilters.tab === 'study') {
+      const taskTag = (task.tag || '').toLowerCase();
+      if (taskTag !== currentFilters.tab) {
+        return false;
+      }
+    }
+
+    if (currentFilters.tab === 'today') {
+      if (!task.dueDate) {
+        return false;
+      }
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const due = new Date(task.dueDate);
+      due.setHours(0, 0, 0, 0);
+
+      if (due > today || task.status === 'done') {
+        return false;
+      }
+    }
+
+    // 2. Фільтр за пріоритетом
+    if (currentFilters.priority !== 'all') {
+      const taskPriority = (task.priority || '').toLowerCase();
+      if (taskPriority !== currentFilters.priority) {
+        return false;
+      }
+    }
+
+    // 3. Фільтр за пошуковим запитом
+    if (currentFilters.search !== '') {
+      const title = (task.title || '').toLowerCase();
+      const desc = (task.desc || '').toLowerCase();
+
+      if (!title.includes(currentFilters.search) && !desc.includes(currentFilters.search)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
 }
 
 
