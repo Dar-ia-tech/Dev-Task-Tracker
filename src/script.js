@@ -314,6 +314,7 @@ document.addEventListener('drop', function(e){
       console.log('3. Статус успішно змінено на:', newStatus);
     }
   }
+  updateColumnCounters();
 });
 
 function saveTask(){
@@ -431,6 +432,7 @@ if(!todoColumn || !inProgressColumn || !doneColumn) return;
       todoColumn.insertAdjacentHTML('beforeend', cardHTML);
     }
   });
+  updateColumnCounters();
 }
 
 function isOverdue(dueDate, status){
@@ -489,6 +491,28 @@ function getFilteredTasks() {
 
     return true;
   });
+}
+
+function updateColumnCounters(){
+  const columnsKanban = document.querySelectorAll('.kanban-column');
+
+  columnsKanban.forEach(column => {
+      const columnCount = column.querySelector('.column-count');
+      const cards = column.querySelectorAll('.task-card').length;
+      if(columnCount){
+        columnCount.textContent = cards;
+      }
+  })
+
+  const boardStats = document.getElementById('board-stats');
+  const filteredTasks = getFilteredTasks();
+  const totalTasks = filteredTasks.length;
+  const completedTasks = filteredTasks.filter(task => task.status === 'done').length;
+  
+     if(boardStats){
+    boardStats.textContent = `${totalTasks} tasks - ${completedTasks} completed`;
+  }
+  
 }
 
 
