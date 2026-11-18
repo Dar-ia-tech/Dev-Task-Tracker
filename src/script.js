@@ -3,6 +3,18 @@ const modal = document.getElementById('addTaskModal');
 const closeBtn = document.getElementById('closeModalBtn');
 const cancelBtn = document.getElementById('cancelModalBtn');
 const addTaskForm = document.querySelector('.modal-form');
+const helpModalBtn = document.getElementById('help-modal');
+const openHelpBtn = document.getElementById('open-help-btn');
+const closeModalBtn = document.getElementById('close-help-btn');
+const settingModal = document.getElementById('settings-modal');
+const openSettingBtn = document.getElementById('open-settings-btn');
+const closeSettingBtn = document.getElementById('close-settings-btn');
+const settingWorkspace = document.getElementById('settings-workspace');
+const settingPlantName = document.getElementById('settings-plant-name');
+const saveBtn = document.getElementById('save-settings-btn');
+const clerBtn = document.getElementById('clear-all-tasks-btn');
+const workspaceDispaly = document.getElementById('workspace-name-display');
+const plantName =document.getElementById('plant-name');
 let currentEditingCard = null;
 const searchFilter = document.getElementById('searchInput');
 const priorityFilter = document.getElementById('priorityFilter');
@@ -57,89 +69,57 @@ closeBtn.addEventListener('click', closeModal);
 cancelBtn.addEventListener('click', closeModal);
 
 // --- Обробник відправки форми (створення / редагування) ---
-addTaskForm.addEventListener('submit', function (e) {
+openHelpBtn.addEventListener('click', function(e){
   e.preventDefault();
+  helpModalBtn.classList.add('active');
+});
 
-  // 1. Зчитуємо дані з полів форми
-  const title = document.getElementById('taskTitle').value;
-  const desc = document.getElementById('taskDesc').value;
-  const status = document.getElementById('taskStatus').value;
-  const priority = document.getElementById('taskPriority').value;
-  const tag = document.getElementById('taskTag').value;
-  const dueDate = document.getElementById('taskDueDate').value;
+closeModalBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  helpModalBtn.classList.remove('active');
+});
 
-  // Валідація заголовка
-  if (title.trim() === '') {
-    alert('Будь ласка, введіть назву задачі!');
-    return;
+openSettingBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  settingWorkspace.value = workspaceDispaly.textContent;
+  settingPlantName.value = plantName.textContent.replace('Meet ', '');
+  settingModal.classList.add('active');
+});
+
+closeSettingBtn.addEventListener('click', function(e){
+  settingModal.classList.remove('active');
+});
+
+window.addEventListener('click', function(e){
+  if(e.target === helpModalBtn){
+    helpModalBtn.classList.remove('active');
   }
 
-  // 💡 Оголошуємо targetContainer НА САМОМУ ПОЧАТКУ (до використання в if/else)
-  const targetContainer = document.querySelector(`[data-status="${status}"] .cards-container`) 
-    || document.querySelectorAll('.cards-container')[0];
-
-  if (currentEditingCard) {
-    // -------------------------------------------------------------
-    // ✏️ РЕЖИМ РЕДАГУВАННЯ
-    // -------------------------------------------------------------
-    const titleEl = currentEditingCard.querySelector('.task-title');
-    const descEl = currentEditingCard.querySelector('.task-desc');
-    const priorityEl = currentEditingCard.querySelector('.priority');
-    const tagEl = currentEditingCard.querySelector('.tag');
-    const dueDateEl = currentEditingCard.querySelector('.due-date');
-    const taskId = currentEditingCard.getAttribute('data-id');
-
-    const taskIndex = tasks.findIndex(t => t.id === taskId);
-
-    if(taskIndex !== -1){
-      tasks[taskIndex].titleEl = titleEl;
-      tasks[taskIndex].descEl = descEl;
-      tasks[taskIndex].priorityEl = priorityEl;
-      tasks[taskIndex].tagEl = tagEl;
-      tasks[taskIndex].dueDateEl = dueDateEl || tasks[taskIndex].dueDateEl;
-    }
-
-    if (titleEl) titleEl.textContent = title;
-    if (descEl) descEl.textContent = desc;
-
-    if (tagEl) {
-      tagEl.textContent = tag;
-      tagEl.className = `tag tag-${tag.toLowerCase()}`;
-    }
-
-    if (priorityEl) {
-      priorityEl.textContent = `${priority} priority`;
-      priorityEl.className = `priority priority-${priority.toLowerCase()}`;
-    }
-
-    if (dueDateEl) {
-      dueDateEl.innerHTML = `<i class="material-symbols-outlined">calendar_today</i> ${dueDate}`;
-    }
-
-    // Якщо статус змінився — переміщуємо картку у відповідну колонку
-    if (targetContainer && currentEditingCard.parentElement !== targetContainer) {
-      targetContainer.appendChild(currentEditingCard);
-    }
-
-    currentEditingCard = null;
-  } else {
-
-    const newTask = {
-    id: 'BL-' + Math.floor(Math.random() * 1000),
-    title: title,
-    desc: desc,
-    tag: tag,
-    priority: priority,
-    dueDate: dueDate, // або з поля дати
-    status: status || 'in-plan-cards',
+  if(e.target === settingModal){
+    settingModal.classList.remove('active');
   }
+});
 
-  tasks.push(newTask);
-  saveTask();
-  loadTasks();
+saveBtn.addEventListener('click', function(e){
+  const newWorkspace = settingWorkspace.value.trim() || 'Personal workspace';
+  const newPlant = settingPlantName.value.trim() || 'Rosie';
+
+  localStorage.setItem('flora_workspace', newWorkspace);
+  localStorage.setItem('flora_plant_name', newPlant);
+
+  workspaceDispaly.textContent = newWorkspace;
+  plantName.textContent = 'Meet ' + newPlant;
+
+  settingModal.classList.remove('active');
+});
+
+clerBtn.addEventListener('click', function(e){
+  if(confirm('Видалити всі задачі?')){
+     tasks = [];
+     localStorage.setItem('tasks', JSON.stringify(tasks));
+     loadTasks();
+     settingModal.classList.remove('active');
   }
-  addTaskForm.reset();
-  closeModal();
 });
 
 // --- Глобальна делегація подій (Edit / Duplicate / Delete / Dropdown) ---
@@ -315,6 +295,26 @@ document.addEventListener('drop', function(e){
     }
   }
   updateColumnCounters();
+});
+
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    modal.classList.remove('active');
+    helpModalBtn.classList.remove('active');
+    settingModal.classList.remove('active');
+  }
+
+  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  if(e.key.toLowerCase() === 'n'){
+     e.preventDefault();
+     modal.classList.add('active');
+  }
+
+  if(e.key === '/'){
+    e.preventDefault();
+    searchFilter.focus();
+  }
 });
 
 function saveTask(){
@@ -508,12 +508,26 @@ function updateColumnCounters(){
   const filteredTasks = getFilteredTasks();
   const totalTasks = filteredTasks.length;
   const completedTasks = filteredTasks.filter(task => task.status === 'done').length;
-  
+
      if(boardStats){
     boardStats.textContent = `${totalTasks} tasks - ${completedTasks} completed`;
   }
   
 }
+
+function applySavedSettings(){
+  const savedWorkspace = localStorage.getItem('flora_workspace');
+  const savedPlant = localStorage.getItem('flora_plant_name');
+
+  if(savedWorkspace){
+    workspaceDispaly.textContent = savedWorkspace;
+  }
+
+  if(savedPlant){
+    plantName.textContent = 'Meet ' + savedPlant;
+  }
+}
+applySavedSettings();
 
 
 loadTasks();

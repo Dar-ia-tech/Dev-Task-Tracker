@@ -1616,3 +1616,302 @@ Finish Task-Board Section
 /* ==========================================
    Finish Dropdown
    ========================================== */
+
+   /* Футер сайдбару та індикатор збереження */
+.save-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #8e92a4;
+  margin-top: 8px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  transition: background-color 0.3s ease;
+}
+
+.save-status.saving .status-dot {
+  background-color: #f59e0b;
+}
+
+/* Модальні вікна футера */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.footer-modal {
+  background: #1e2030;
+  border: 1px solid #2e3148;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 460px;
+  padding: 24px;
+  color: #fff;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  color: #8e92a4;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.close-modal-btn:hover {
+  color: #fff;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8e92a4;
+  margin-bottom: 10px;
+}
+
+/* Shortcuts */
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #25283c;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.shortcut-item kbd {
+  background: #161824;
+  border: 1px solid #3a3e5c;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #c4b5fd;
+}
+
+/* FAQ Акордеон */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  background: #25283c;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.faq-item p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Settings форми */
+.footer-modal .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.footer-modal .form-group label {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.footer-modal .form-group input {
+  background: #25283c;
+  border: 1px solid #363a54;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Внутрішнє вікно для Help та Settings */
+.modal-window.footer-modal {
+  background-color: #1e1b2e;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 480px;
+  color: #f3f4f6;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.modal-window .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.modal-window .close-modal-btn {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-window .close-modal-btn:hover {
+  color: #ffffff;
+}
+
+/* Стилі для полів та кнопок у Settings */
+.modal-window .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.modal-window .form-group input {
+  background: #13111c;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background: #7c3aed;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Стилі для гарячих клавіш та FAQ у Help */
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #13111c;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.shortcut-item kbd {
+  background: #2d2844;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.faq-item {
+  background: #13111c;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.faq-item p {
+  margin-top: 8px;
+  color: #9ca3af;
+  line-height: 1.4;
+}
