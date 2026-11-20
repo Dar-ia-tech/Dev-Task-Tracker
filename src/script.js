@@ -18,7 +18,19 @@ const plantName =document.getElementById('plant-name');
 let currentEditingCard = null;
 const searchFilter = document.getElementById('searchInput');
 const priorityFilter = document.getElementById('priorityFilter');
+const logoutBtn = document.getElementById('logout-btn');
 let tasks = [];
+
+const chekItem = localStorage.getItem('flora_auth');
+if(chekItem !== 'true'){
+  window.location.href = 'login.html';
+}
+
+logoutBtn.addEventListener('click', function(e){
+  e.preventDefault();
+  localStorage.removeItem('flora_auth');
+  window.location.href = 'login.html';
+})
 
 // --- Відкриття / Закриття модального вікна ---
 function openModal() {

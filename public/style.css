@@ -1915,3 +1915,116 @@ Finish Task-Board Section
   color: #9ca3af;
   line-height: 1.4;
 }
+
+/* ===== СТОРІНКА ВХОДУ (LOGIN PAGE) ===== */
+body.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-main, #0f0e1a);
+  background-image: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.18), transparent 60%);
+  margin: 0;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: #181626;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.login-logo {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #a78bfa;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.login-header h1 {
+  font-size: 24px;
+  margin: 0 0 6px;
+  color: #ffffff;
+}
+
+.login-header p {
+  font-size: 14px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.login-form label {
+  font-size: 13px;
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.login-form input {
+  background-color: #11101d;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.login-form input:focus {
+  border-color: #7c3aed;
+}
+
+.login-error {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.login-error.hidden {
+  display: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 4px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.login-btn:hover {
+  background-color: #6d28d9;
+}
+
+.login-btn:active {
+  transform: scale(0.99);
+}
