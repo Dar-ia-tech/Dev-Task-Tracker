@@ -19,8 +19,14 @@ let currentEditingCard = null;
 const searchFilter = document.getElementById('searchInput');
 const priorityFilter = document.getElementById('priorityFilter');
 const logoutBtn = document.getElementById('logout-btn');
+const userGreetingEl = document.getElementById('user-greeting-name');
 let tasks = [];
 
+const savedUsername = localStorage.getItem('flora_username');
+
+if (userGreetingEl && savedUsername) {
+  userGreetingEl.textContent = savedUsername;
+}
 const chekItem = localStorage.getItem('flora_auth');
 if(chekItem !== 'true'){
   window.location.href = 'login.html';
@@ -32,7 +38,6 @@ logoutBtn.addEventListener('click', function(e){
   window.location.href = 'login.html';
 })
 
-// --- Відкриття / Закриття модального вікна ---
 function openModal() {
   modal.classList.add('active');
 }
@@ -68,7 +73,6 @@ const currentFilters = {
     })
   }
 
-// Слухачі для кнопок додавання нової задачі
 addBtn.forEach(btn => {
   btn.addEventListener('click', () => {
     currentEditingCard = null;
@@ -524,7 +528,32 @@ function updateColumnCounters(){
      if(boardStats){
     boardStats.textContent = `${totalTasks} tasks - ${completedTasks} completed`;
   }
-  
+  const WEEKLY_GOAL = 5;
+  const doneCount = tasks.filter(task => task.status === 'done').length;
+
+  const momentumCompletedEl = document.getElementById('momentum-completed') || document.querySelector('.momentum-card .stat-number');
+  const momentumDescEl = document.getElementById('momentum-desc') || document.querySelector('.momentum-desc');
+
+  if (momentumCompletedEl) {
+    momentumCompletedEl.textContent = doneCount;
+  }
+
+  if (momentumDescEl) {
+    const remaining = WEEKLY_GOAL - doneCount;
+    if (remaining > 0) {
+      momentumDescEl.textContent = `Small steps. Strong roots. You're ${remaining} ${remaining === 1 ? 'task' : 'tasks'} away from your goal.`;
+    } else {
+      momentumDescEl.textContent = `Amazing job! You've reached your weekly goal of ${WEEKLY_GOAL} completed tasks! 🌸`;
+    }
+  }
+
+  const totalYearEl = document.getElementById('total-completed-year') || document.querySelector('.total-count');
+  if (totalYearEl) {
+    totalYearEl.textContent = `${doneCount} ${doneCount === 1 ? 'task' : 'tasks'} completed`;
+  }
+
+  updateAnalyticsView();
+  updatePlantCompanion();
 }
 
 function applySavedSettings(){
@@ -543,3 +572,180 @@ applySavedSettings();
 
 
 loadTasks();
+
+
+document.addEventListener('click', function (e) {
+  const moreBtn = e.target.closest('.card-more');
+
+  const existingMenu = document.querySelector('.card-dropdown-menu');
+  if (existingMenu && !e.target.closest('.card-dropdown-menu')) {
+    existingMenu.remove();
+  }
+
+  if (!moreBtn) return;
+
+  e.stopPropagation();
+  const card = moreBtn.closest('.task-card');
+  const taskId = card ? card.dataset.id : null;
+  if (!taskId) return;
+
+  const task = tasks.find(t => String(t.id) === String(taskId));
+  if (!task) return;
+
+  const menu = document.createElement('div');
+  menu.className = 'card-dropdown-menu';
+  menu.innerHTML = `
+    ${task.status !== 'in-plan' ? `<button data-action="move" data-status="in-plan">Move to In Plan</button>` : ''}
+    ${task.status !== 'in-progress' ? `<button data-action="move" data-status="in-progress">Move to In Progress</button>` : ''}
+    ${task.status !== 'done' ? `<button data-action="move" data-status="done">Move to Done</button>` : ''}
+    <hr>
+    <button data-action="delete" class="danger">Delete task</button>
+  `;
+
+  card.style.position = 'relative';
+  card.appendChild(menu);
+
+  menu.addEventListener('click', function (menuEvent) {
+    const actionBtn = menuEvent.target.closest('button');
+    if (!actionBtn) return;
+
+    const action = actionBtn.dataset.action;
+
+    if (action === 'move') {
+      const newStatus = actionBtn.dataset.status;
+      task.status = newStatus;
+      if (newStatus === 'done') {
+        task.completedAt = task.completedAt || new Date().toISOString().split('T')[0];
+      } else {
+        task.completedAt = null;
+      }
+    } else if (action === 'delete') {
+      tasks = tasks.filter(t => String(t.id) !== String(taskId));
+    }
+
+    localStorage.setItem('flora_tasks', JSON.stringify(tasks)); 
+    
+    if (typeof renderTasks === 'function') renderTasks();
+  });
+});
+
+function updateAnalyticsView() {
+  const total = tasks.length;
+  const plan = tasks.filter(t => t.status === 'in-plan' || t.status === 'todo').length;
+  const progress = tasks.filter(t => t.status === 'in-progress').length;
+  const done = tasks.filter(t => t.status === 'done').length;
+
+  const dev = tasks.filter(t => (t.category || '').toLowerCase() === 'dev').length;
+  const study = tasks.filter(t => (t.category || '').toLowerCase() === 'study').length;
+  const high = tasks.filter(t => (t.priority || '').toLowerCase() === 'high').length;
+
+  const pct = (count) => (total > 0 ? Math.round((count / total) * 100) : 0);
+
+  const rateEl = document.getElementById('analytics-completion-rate');
+  if (rateEl) rateEl.textContent = `${pct(done)}% overall completion (${done} of ${total} tasks)`;
+
+  const setMetric = (textId, barId, count) => {
+    const textEl = document.getElementById(textId);
+    const barEl = document.getElementById(barId);
+    if (textEl) textEl.textContent = `${count} (${pct(count)}%)`;
+    if (barEl) barEl.style.width = `${pct(count)}%`;
+  };
+
+  setMetric('stat-status-plan', 'bar-status-plan', plan);
+  setMetric('stat-status-progress', 'bar-status-progress', progress);
+  setMetric('stat-status-done', 'bar-status-done', done);
+  setMetric('stat-cat-dev', 'bar-cat-dev', dev);
+  setMetric('stat-cat-study', 'bar-cat-study', study);
+  setMetric('stat-prio-high', 'bar-prio-high', high);
+}
+
+const navItems = document.querySelectorAll('.sidebar-nav li[data-view]');
+const boardView = document.getElementById('board-view');
+const analyticsView = document.getElementById('analytics-view');
+
+navItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    navItems.forEach(el => el.classList.remove('active'));
+    item.classList.add('active');
+
+    const view = item.dataset.view;
+    if (view === 'analytics') {
+      if (boardView) boardView.classList.add('hidden');
+      if (analyticsView) analyticsView.classList.remove('hidden');
+      updateAnalyticsView();
+    } else {
+      if (analyticsView) analyticsView.classList.add('hidden');
+      if (boardView) boardView.classList.remove('hidden');
+    }
+  });
+});
+
+function updatePlantCompanion() {
+  const doneCount = tasks.filter(t => t.status === 'done').length;
+
+  // Кожні 3 виконані задачі — новий рівень (максимум 4 рівні = 12 задач)
+  const TASKS_PER_LEVEL = 3;
+  const level = Math.min(4, Math.floor(doneCount / TASKS_PER_LEVEL) + 1);
+  const progressInLevel = doneCount >= 12 ? 100 : Math.round(((doneCount % TASKS_PER_LEVEL) / TASKS_PER_LEVEL) * 100);
+
+  const stages = {
+    1: { emoji: '🌱', title: 'Level 1 - Seed', desc: 'Just planted! Complete tasks to help Rosie sprout.' },
+    2: { emoji: '🌿', title: 'Level 2 - Sprouting', desc: 'Growing strong! Keep up your steady rhythm.' },
+    3: { emoji: '🌷', title: 'Level 3 - Budding', desc: 'Almost in full bloom! Your consistency pays off.' },
+    4: { emoji: '🌸', title: 'Level 4 - Flourishing', desc: 'In full bloom! Rosie is thriving thanks to you.' }
+  };
+
+  const currentStage = stages[level];
+
+  const avatarEl = document.getElementById('plant-avatar') || document.querySelector('.plant-avatar');
+  const descEl = document.getElementById('plant-desc') || document.querySelector('.plant-desc');
+  const levelEl = document.getElementById('plant-level-label') || document.querySelector('.plant-progress-info span:first-child');
+  const percentEl = document.getElementById('plant-percent') || document.querySelector('.plant-progress-info span:last-child');
+  const fillEl = document.getElementById('plant-progress-fill') || document.querySelector('.progress-fill');
+
+  if (avatarEl) avatarEl.textContent = currentStage.emoji;
+  if (descEl) descEl.textContent = currentStage.desc;
+  if (levelEl) levelEl.textContent = currentStage.title;
+  if (percentEl) percentEl.textContent = `${progressInLevel}%`;
+  if (fillEl) fillEl.style.width = `${progressInLevel}%`;
+}
+
+// 1. Міняємо "Alex Kovalenko" у сайдбарі на реальне ім'я користувача
+const currentUserName = localStorage.getItem('flora_username') || 'Daria';
+document.querySelectorAll('.user-name, .sidebar-header *').forEach(el => {
+  if (el.children.length === 0 && el.textContent.trim() === 'Alex Kovalenko') {
+    el.textContent = currentUserName;
+  }
+});
+
+// 2. Оновлюємо дату "Wed, Oct 14, 2026" на реальну поточну дату
+document.querySelectorAll('span, p, div').forEach(el => {
+  if (el.children.length === 0 && el.textContent.includes('Oct 14, 2026')) {
+    el.textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  }
+});
+
+// 3. Підключаємо кнопку "+ New task" зверху справа до твоєї модалки
+document.querySelectorAll('button, a').forEach(btn => {
+  if (btn.textContent.includes('New task')) {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof currentEditingCard !== 'undefined') currentEditingCard = null;
+      const form = document.querySelector('.modal-form');
+      if (form) form.reset();
+
+      if (typeof openModal === 'function') {
+        openModal();
+      } else {
+        const taskModal = document.getElementById('addTaskModal');
+        if (taskModal) taskModal.classList.add('active');
+      }
+    });
+  }
+});

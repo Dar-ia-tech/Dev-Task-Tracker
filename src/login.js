@@ -18,10 +18,13 @@ loginForm.addEventListener('submit', function(e){
 
     if(getInput === MY_LOGIN && getPassword === MY_PASSWORD){
     localStorage.setItem('flora_auth', 'true');
+    localStorage.setItem('flora_username', getInput);
     window.location.href = 'index.html';
 }else{
     errorMsg.classList.remove('hidden');
 }
+
+
 });
 
 loginUser.addEventListener('input', function(e){

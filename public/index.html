@@ -20,7 +20,7 @@
     <div class="user-profile">
       <div class="avatar" id="user-avatar">MD</div>
       <div class="user-info">
-        <span class="user-name" id="user-name-display">Alex Kovalenko</span>
+        <span class="user-name" id="user-name-display">Daria Mykytynets</span>
         <span class="workspace-name" id="workspace-name-display">Personal workspace</span>
       </div>
     </div>
@@ -59,11 +59,11 @@
         <p class="plant-desc" id="plant-desc">Every task helps her grow. Keep your momentum blooming!</p>
         
         <div class="plant-progress-info">
-          <span id="plant-level">Level 3 - Flourishing</span>
-          <span id="plant-percent">72%</span>
+          <span id="plant-level-label">Level 1 - Sprouting</span>
+          <span id="plant-percent">0%</span>
         </div>
         <div class="progress-bar">
-          <div class="progress-fill" id="plant-progress-fill" style="width: 72%;"></div>
+          <div class="progress-fill" id="plant-progress-fill" style="width: 0%;"></div>
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
   <section class="welcom-section">
   <div class="welcome-text">
     <h1>A little progress, every day</h1>
-    <p>Welcome back, Alex. Let's make room for your next big idea.</p>
+    <p>Welcome back, <span id="user-greeting-name">Alex </span>, Let's make room for your next big idea.</p>
   </div>
 
   <div class="add-task">
@@ -121,6 +121,8 @@
       </button>
     </div>
     </section>   
+
+    <div id="board-view">
 <section class="dashboard-analytics">
 
   <div class="analytics-card grid-card">
@@ -155,97 +157,15 @@
           <span>Sep</span><span>Oct</span>
         </div>
 
-       <div class="activity-grid">
-            <!-- Приклади зафарбованих квадратиків за допомогою класів level-1, level-2, level-3, pink -->
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-3"></div><div class="square pink"></div>
-            <div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div>
-            <div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-3"></div><div class="square level-1"></div><div class="square level-2"></div><div class="square"></div><div class="square level-3"></div><div class="square pink"></div><div class="square level-2"></div>
-            <div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div>
-            <div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square level-3"></div>
-            <div class="square pink"></div><div class="square level-2"></div><div class="square level-1"></div><div class="square level-3"></div><div class="square"></div><div class="square pink"></div><div class="square level-2"></div>
+       <div class="activity-grid" id="activity-grid">
+
            </div>
       </div>
     </div>
 
     <!-- Подвал лівої картки -->
     <div class="card-footer">
-      <span class="total-count">238 tasks completed this year</span>
+      <span class="total-count" id="total-completed-year">238 tasks completed this year</span>
       <div class="legend">
         <span>Less</span>
         <div class="square"></div>
@@ -267,8 +187,8 @@
 
     <div class="momentum-body">
       <div class="big-stat">
-        <span class="stat-number">3</span>
-        <span class="stat-total">/ 5 tasks</span>
+        <span class="stat-number" id="momentum-completed">3</span>
+        <span class="stat-total" id="momentum-goal">/ 5 tasks</span>
       </div>
 
       <div class="momentum-badge">
@@ -276,7 +196,7 @@
         <span>+1 task vs. last week</span>
       </div>
 
-      <p class="momentum-desc">
+      <p class="momentum-desc" id="momentum-desc">
         Small steps. Strong roots. You're 2 tasks away from your goal.
       </p>
     </div>
@@ -497,8 +417,7 @@
               <i class="material-symbols-outlined">flag</i> High priority
             </section>-->
 
-            <section class="task-board">
-  
+ <section class="task-board">
   <div class="board-header">
     <div class="board-title-group">
       <h2>My task board</h2>
@@ -536,7 +455,7 @@
       <div class="column-title">
         <span class="status-dot purple"></span>
         <h3>In Plan / To Do</h3>
-        <span class="column-count">3</span>
+        <span class="column-count" id="count-in-plan">3</span>
       </div>
       <div class="column-actions">
         <!-- Залишаємо тільки три крапки (плюсик зверху прибрано) -->
@@ -623,7 +542,7 @@
       <div class="column-title">
         <span class="status-dot pink"></span>
         <h3>In Progress</h3>
-        <span class="column-count">3</span>
+        <span class="column-count" id="count-in-progress">3</span>
       </div>
       <div class="column-actions">
         <button class="icon-btn-small">
@@ -684,7 +603,7 @@
       <div class="column-title">
         <span class="status-dot green"></span>
         <h3>Done</h3>
-        <span class="column-count">3</span>
+        <span class="column-count" id="count-done">3</span>
       </div>
       <div class="column-actions">
         <button class="icon-btn-small">
@@ -724,6 +643,61 @@
   </div>
 
 </div>
+</section>
+</div>
+<section id="analytics-view" class="analytics-page hidden">
+  <div class="board-header">
+    <div class="board-title-group">
+      <h2>Workspace Analytics</h2>
+      <span class="tasks-count" id="analytics-completion-rate">0% overall completion</span>
+    </div>
+  </div>
+
+  <div class="analytics-summary-grid">
+    <!-- Картка 1: Загальний прогрес по статусах -->
+    <div class="analytics-card">
+      <h3>Tasks by Status</h3>
+      <div class="metric-row">
+        <span>In Plan / To Do</span>
+        <strong id="stat-status-plan">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar purple" id="bar-status-plan" style="width: 0%;"></div></div>
+
+      <div class="metric-row">
+        <span>In Progress</span>
+        <strong id="stat-status-progress">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar pink" id="bar-status-progress" style="width: 0%;"></div></div>
+
+      <div class="metric-row">
+        <span>Done</span>
+        <strong id="stat-status-done">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar green" id="bar-status-done" style="width: 0%;"></div></div>
+    </div>
+
+    <!-- Картка 2: Розподіл по категоріях та пріоритетах -->
+    <div class="analytics-card">
+      <h3>Focus & Priorities</h3>
+      <div class="metric-row">
+        <span>Dev tasks</span>
+        <strong id="stat-cat-dev">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar purple" id="bar-cat-dev" style="width: 0%;"></div></div>
+
+      <div class="metric-row">
+        <span>Study tasks</span>
+        <strong id="stat-cat-study">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar pink" id="bar-cat-study" style="width: 0%;"></div></div>
+
+      <div class="metric-row">
+        <span>High Priority</span>
+        <strong id="stat-prio-high">0</strong>
+      </div>
+      <div class="progress-track"><div class="progress-fill-bar danger" id="bar-prio-high" style="width: 0%;"></div></div>
+    </div>
+  </div>
 </section>
 </main>
 

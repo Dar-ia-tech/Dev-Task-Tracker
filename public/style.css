@@ -1916,7 +1916,6 @@ Finish Task-Board Section
   line-height: 1.4;
 }
 
-/* ===== СТОРІНКА ВХОДУ (LOGIN PAGE) ===== */
 body.login-page {
   display: flex;
   justify-content: center;
@@ -2027,4 +2026,98 @@ body.login-page {
 
 .login-btn:active {
   transform: scale(0.99);
+}
+
+.card-dropdown-menu {
+  position: absolute;
+  top: 38px;
+  right: 12px;
+  background: #ffffff;
+  border: 1px solid #eceaf6;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(28, 25, 52, 0.12);
+  padding: 6px;
+  z-index: 50;
+  min-width: 165px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-dropdown-menu button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #2b2845;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.card-dropdown-menu button:hover {
+  background: #f5f3ff;
+}
+
+.card-dropdown-menu hr {
+  border: none;
+  border-top: 1px solid #f0eef8;
+  margin: 4px 0;
+}
+
+.card-dropdown-menu button.danger {
+  color: #e11d48;
+}
+
+.card-dropdown-menu button.danger:hover {
+  background: #fff1f2;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.analytics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.analytics-summary-grid h3 {
+  margin-bottom: 16px;
+  font-size: 16px;
+  color: #1c1934;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #5b5777;
+  margin: 12px 0 6px;
+}
+
+.progress-fill-bar.purple { background: #8b5cf6; }
+.progress-fill-bar.pink   { background: #ec4899; }
+.progress-fill-bar.green  { background: #10b981; }
+.progress-fill-bar.danger { background: #f43f5e; }
+
+
+#board-view,
+#analytics-view {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  min-width: 0; /* Забороняє flex-контейнеру розпирати сторінку вшир */
+}
+
+#board-view > *,
+#analytics-view > * {
+  max-width: 100%;
+  box-sizing: border-box;
 }
